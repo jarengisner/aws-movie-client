@@ -1,47 +1,44 @@
 //importing modules from other files//
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
 export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [movies, setMovies] = useState([
-    {
-      id: 1,
-      Title: 'Joker',
-      Description:
-        "The rise of Arthur Fleck, from aspiring stand-up comedian and pariah to Gotham's clown prince and leader of the revolution",
-      Director: 'Todd Phillips',
-      imageUrl:
-        'https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg',
-      Genre: 'Drama',
-    },
-    {
-      id: 2,
-      Title: 'Interstellar',
-      Description:
-        "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
-      Director: 'Chritopher Nolan',
-      imageUrl:
-        'https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
-      Genre: 'Sci-Fi',
-    },
-    {
-      id: 3,
-      Title: 'Shawshank Redemption',
-      Description:
-        'Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.',
-      Director: 'Frank Darabont',
-      imageUrl:
-        'https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg',
-      Genre: 'Drama',
-    },
-  ]);
+  //movies is initialized to nothing, but then populated below//
+  const [movies, setMovies] = useState([]);
 
+  //useEffect is used to run side effects during the course of a components lifecycle//
+  useEffect(() => {
+    fetch('https://movie-findr.herokuapp.com/movies')
+      .then((res) => res.json())
+      .then((data) => {
+        const dataMovies = data.map((movie) => {
+          return {
+            id: movie._id,
+            title: movie.Title,
+            director: movie.Director.Name,
+            directorBio: movie.Director.Bio,
+            genre: movie.Genre.Name,
+            genreDescription: movie.Genre.Description,
+            description: movie.Description,
+            imageUrl: movie.ImageUrl,
+          };
+        });
+        //console log for debugging//
+        console.log(dataMovies);
+        //populates our state using the function we declared when initializing the state above//
+        setMovies(dataMovies);
+      });
+    //since we haven't set any dependencies in the array, we will only fetch upon mounting//
+  }, []);
+  //if we click on a movie//
   if (selectedMovie) {
     return (
       <MovieView
+        //passes our selected movie as a prop to MovieView//
         movie={selectedMovie}
+        //passes our onBackClick function as a prop to MovieView//
         onBackClick={() => {
           setSelectedMovie(null);
         }}
@@ -58,9 +55,11 @@ export const MainView = () => {
       {movies.map((movie) => (
         <MovieCard
           key={movie.id}
+          //deconstructs movie so that it is easily accessible as a prop//
           movie={movie}
-          onMovieClick={(newSelectedBook) => {
-            setSelectedMovie(newSelectedBook);
+          //passes our onMovieClick function as a prop to MovieCard//
+          onMovieClick={(newSelectedMovie) => {
+            setSelectedMovie(newSelectedMovie);
           }}
         />
       ))}
