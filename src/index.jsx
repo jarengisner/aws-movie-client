@@ -4,9 +4,10 @@ import { MainView } from '../components/main-view/main-view';
 // Import statement to indicate that you need to bundle `./index.scss`
 import './index.scss';
 
-// Main component (will eventually use all the others)
+//creates our <App /> component that we render in below//
 const App = () => {
   return (
+    //populates the div with our main component, which includes by proxy the child components//
     <div>
       <MainView />
     </div>
