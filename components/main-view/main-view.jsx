@@ -36,7 +36,7 @@ export const MainView = () => {
   }, []);
 
   if (!user) {
-    return <LoginView />;
+    return <LoginView onLogin={(username) => setUser(user)} />;
   }
 
   //if we click on a movie//
