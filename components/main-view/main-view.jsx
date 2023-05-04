@@ -2,11 +2,13 @@
 import { useEffect, useState } from 'react';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { LoginView } from '../login-view/login-view';
 
 export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   //movies is initialized to nothing, but then populated below//
   const [movies, setMovies] = useState([]);
+  const [user, setUser] = useState(null);
 
   //useEffect is used to run side effects during the course of a components lifecycle//
   useEffect(() => {
@@ -32,6 +34,11 @@ export const MainView = () => {
       });
     //since we haven't set any dependencies in the array, we will only fetch upon mounting//
   }, []);
+
+  if (!user) {
+    return <LoginView />;
+  }
+
   //if we click on a movie//
   if (selectedMovie) {
     return (
