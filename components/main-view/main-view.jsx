@@ -9,10 +9,18 @@ export const MainView = () => {
   //movies is initialized to nothing, but then populated below//
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   //useEffect is used to run side effects during the course of a components lifecycle//
   useEffect(() => {
-    fetch('https://movie-findr.herokuapp.com/movies')
+    if (!token) {
+      console.log('whyyyyy isnt there a token here');
+      return;
+    }
+
+    fetch('https://movie-findr.herokuapp.com/movies', {
+      headers: { Authorization: 'Bearer ${token' },
+    })
       .then((res) => res.json())
       .then((data) => {
         const dataMovies = data.map((movie) => {
@@ -32,11 +40,17 @@ export const MainView = () => {
         //populates our state using the function we declared when initializing the state above//
         setMovies(dataMovies);
       });
-    //since we haven't set any dependencies in the array, we will only fetch upon mounting//
-  }, []);
+  }, [token]);
 
   if (!user) {
-    return <LoginView onLogin={(username) => setUser(user)} />;
+    return (
+      <LoginView
+        onLogin={(user, token) => {
+          setUser(user);
+          setToken(token);
+        }}
+      />
+    );
   }
 
   //if we click on a movie//

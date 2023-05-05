@@ -4,28 +4,38 @@ export const LoginView = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     //Object containing our params for our login//
     //May need some adjustment to fit with the API//
     const data = {
-      username: username,
-      password: password,
+      Username: username,
+      Password: password,
     };
-    //sends our post request for logging in//
+
     fetch('https://movie-findr.herokuapp.com/login', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     })
-      .then((res) => {
-        if (res.ok) {
-          onLogin(username);
+      .then((response) => {
+        response.json();
+        console.log(response);
+      })
+      .then((data) => {
+        console.log('Login response: ', data);
+        if (data.user) {
+          console.log(data.user);
+          console.log('successful login');
+          onLogin(data.user, data.token);
         } else {
-          alert('Login attempt failed');
+          alert('No such user');
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((e) => {
+        console.log(e);
       });
   };
 
@@ -38,6 +48,7 @@ export const LoginView = ({ onLogin }) => {
           value={username}
           onChange={(e) => {
             setUsername(e.target.value);
+            console.log(username);
           }}
         />
       </label>

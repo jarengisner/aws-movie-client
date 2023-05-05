@@ -27303,9 +27303,18 @@ const MainView = ()=>{
     //movies is initialized to nothing, but then populated below//
     const [movies, setMovies] = (0, _react.useState)([]);
     const [user, setUser] = (0, _react.useState)(null);
+    const [token, setToken] = (0, _react.useState)(null);
     //useEffect is used to run side effects during the course of a components lifecycle//
     (0, _react.useEffect)(()=>{
-        fetch("https://movie-findr.herokuapp.com/movies").then((res)=>res.json()).then((data)=>{
+        if (!token) {
+            console.log("whyyyyy isnt there a token here");
+            return;
+        }
+        fetch("https://movie-findr.herokuapp.com/movies", {
+            headers: {
+                Authorization: "Bearer ${token"
+            }
+        }).then((res)=>res.json()).then((data)=>{
             const dataMovies = data.map((movie)=>{
                 return {
                     id: movie._id,
@@ -27323,14 +27332,18 @@ const MainView = ()=>{
             //populates our state using the function we declared when initializing the state above//
             setMovies(dataMovies);
         });
-    //since we haven't set any dependencies in the array, we will only fetch upon mounting//
-    }, []);
+    }, [
+        token
+    ]);
     if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-        onLogin: (username)=>setUser(user)
+        onLogin: (user, token)=>{
+            setUser(user);
+            setToken(token);
+        }
     }, void 0, false, {
         fileName: "components/main-view/main-view.jsx",
-        lineNumber: 39,
-        columnNumber: 12
+        lineNumber: 47,
+        columnNumber: 7
     }, undefined);
     //if we click on a movie//
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
@@ -27342,14 +27355,14 @@ const MainView = ()=>{
         }
     }, void 0, false, {
         fileName: "components/main-view/main-view.jsx",
-        lineNumber: 45,
+        lineNumber: 59,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "'The movie list is empty'"
     }, void 0, false, {
         fileName: "components/main-view/main-view.jsx",
-        lineNumber: 57,
+        lineNumber: 71,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27362,16 +27375,16 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "components/main-view/main-view.jsx",
-                lineNumber: 63,
+                lineNumber: 77,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "components/main-view/main-view.jsx",
-        lineNumber: 61,
+        lineNumber: 75,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "gHPuUNcX2i8W/3RJ3Fdn+CRHgq0=");
+_s(MainView, "jdXBHuB8hLfz941UiQvgzsbbSPI=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -28386,23 +28399,32 @@ const LoginView = ({ onLogin  })=>{
     _s();
     const [username, setUsername] = (0, _react.useState)("");
     const [password, setPassword] = (0, _react.useState)("");
-    const handleSubmit = (e)=>{
-        e.preventDefault();
+    const handleSubmit = (event)=>{
+        event.preventDefault();
         //Object containing our params for our login//
         //May need some adjustment to fit with the API//
         const data = {
-            username: username,
-            password: password
+            Username: username,
+            Password: password
         };
-        //sends our post request for logging in//
         fetch("https://movie-findr.herokuapp.com/login", {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(data)
-        }).then((res)=>{
-            if (res.ok) onLogin(username);
-            else alert("Login attempt failed");
-        }).catch((err)=>{
-            console.log(err);
+        }).then((response)=>{
+            response.json();
+            console.log(response);
+        }).then((data)=>{
+            console.log("Login response: ", data);
+            if (data.user) {
+                console.log(data.user);
+                console.log("successful login");
+                onLogin(data.user, data.token);
+            } else alert("No such user");
+        }).catch((e)=>{
+            console.log(e);
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -28415,16 +28437,17 @@ const LoginView = ({ onLogin  })=>{
                         value: username,
                         onChange: (e)=>{
                             setUsername(e.target.value);
+                            console.log(username);
                         }
                     }, void 0, false, {
                         fileName: "components/login-view/login-view.jsx",
-                        lineNumber: 36,
+                        lineNumber: 46,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "components/login-view/login-view.jsx",
-                lineNumber: 34,
+                lineNumber: 44,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28438,13 +28461,13 @@ const LoginView = ({ onLogin  })=>{
                         }
                     }, void 0, false, {
                         fileName: "components/login-view/login-view.jsx",
-                        lineNumber: 47,
+                        lineNumber: 58,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "components/login-view/login-view.jsx",
-                lineNumber: 45,
+                lineNumber: 56,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -28453,13 +28476,13 @@ const LoginView = ({ onLogin  })=>{
                 children: "Login"
             }, void 0, false, {
                 fileName: "components/login-view/login-view.jsx",
-                lineNumber: 56,
+                lineNumber: 67,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "components/login-view/login-view.jsx",
-        lineNumber: 33,
+        lineNumber: 43,
         columnNumber: 5
     }, undefined);
 };
