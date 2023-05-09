@@ -18,13 +18,14 @@ export const LoginView = ({ onLogin }) => {
       headers: {
         'Content-Type': 'application/json',
       },
+      //I think that we need to send as URL parameters//
       body: JSON.stringify(data),
     })
       .then((response) => {
         response.json();
-        console.log(response);
       })
       .then((data) => {
+        //data is undefined when reaching this point//
         console.log('Login response: ', data);
         if (data.user) {
           localStorage.setItem('user', JSON.stringify(data.user));
@@ -41,7 +42,7 @@ export const LoginView = ({ onLogin }) => {
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <label>
         Username:
         <input
@@ -65,9 +66,7 @@ export const LoginView = ({ onLogin }) => {
         />
       </label>
 
-      <button type='submit' onSubmit={handleSubmit}>
-        Login
-      </button>
+      <button type='submit'>Login</button>
     </form>
   );
 };

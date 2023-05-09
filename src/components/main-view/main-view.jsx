@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
+import { SignUpView } from '../signup-view/signup-view';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -16,12 +17,12 @@ export const MainView = () => {
   //useEffect is used to run side effects during the course of a components lifecycle//
   useEffect(() => {
     if (!token) {
-      console.log('whyyyyy isnt there a token here');
+      console.log("can't figure out why there isn\t a token here");
       return;
     }
 
     fetch('https://movie-findr.herokuapp.com/movies', {
-      headers: { Authorization: 'Bearer ${token' },
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -46,12 +47,16 @@ export const MainView = () => {
 
   if (!user) {
     return (
-      <LoginView
-        onLogin={(user, token) => {
-          setUser(user);
-          setToken(token);
-        }}
-      />
+      <div>
+        <LoginView
+          onLogin={(user, token) => {
+            setUser(user);
+            setToken(token);
+          }}
+        />
+        or
+        <SignUpView />
+      </div>
     );
   }
 
@@ -86,6 +91,15 @@ export const MainView = () => {
           }}
         />
       ))}
+      <button
+        onClick={() => {
+          setUser(null);
+          setToken(null);
+          localStorage.clear();
+        }}
+      >
+        Log Out
+      </button>
     </div>
   );
 };
