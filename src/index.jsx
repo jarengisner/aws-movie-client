@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
-import { MainView } from '../components/main-view/main-view';
+//Always double check path to file, error here was one . //
+import { MainView } from './components/main-view/main-view';
 
 // Import statement to indicate that you need to bundle `./index.scss`
 import './index.scss';

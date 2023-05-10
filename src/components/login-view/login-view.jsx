@@ -21,9 +21,8 @@ export const LoginView = ({ onLogin }) => {
       //I think that we need to send as URL parameters//
       body: JSON.stringify(data),
     })
-      .then((response) => {
-        response.json();
-      })
+      //one liner arrow functions you can omit the return and brackets if function is one line//
+      .then((response) => response.json())
       .then((data) => {
         //data is undefined when reaching this point//
         console.log('Login response: ', data);

@@ -7,7 +7,8 @@ import { SignUpView } from '../signup-view/signup-view';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
-  const storedToken = JSON.parse(localStorage.getItem('token'));
+  //token is stored as a string, not JSON, so no need to parse here//
+  const storedToken = localStorage.getItem('token');
   const [selectedMovie, setSelectedMovie] = useState(null);
   //movies is initialized to nothing, but then populated below//
   const [movies, setMovies] = useState([]);

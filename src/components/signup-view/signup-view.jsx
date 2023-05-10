@@ -75,7 +75,7 @@ export const SignUpView = () => {
           }}
           required
         ></input>
-        <button type='submit'></button>
+        <button type='submit'>Sign up</button>
       </form>
     </div>
   );
