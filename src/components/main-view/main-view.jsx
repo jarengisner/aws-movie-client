@@ -4,7 +4,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignUpView } from '../signup-view/signup-view';
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -43,9 +43,9 @@ export const MainView = () => {
   }, [token]);
 
   return (
-    <Row>
+    <Row className='justify-content-md-center'>
       {!user || !token ? (
-        <>
+        <Col md={6}>
           Log In:
           <LoginView
             onLogin={(user, token) => {
@@ -55,26 +55,30 @@ export const MainView = () => {
           />
           or Sign up:
           <SignUpView />
-        </>
+        </Col>
       ) : selectedMovie ? (
-        <MovieView
-          movie={selectedMovie}
-          onBackClick={() => setSelectedMovie(null)}
-        />
+        <Col md={8}>
+          <MovieView
+            movie={selectedMovie}
+            onBackClick={() => setSelectedMovie(null)}
+          />
+        </Col>
       ) : movies.length === 0 ? (
         <div>The list is empty!</div>
       ) : (
         <>
           {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              //deconstructs movie so that it is easily accessible as a prop//
-              movie={movie}
-              //passes our onMovieClick function as a prop to MovieCard//
-              onMovieClick={(newSelectedMovie) => {
-                setSelectedMovie(newSelectedMovie);
-              }}
-            />
+            <Col md={3}>
+              <MovieCard
+                key={movie.id}
+                //deconstructs movie so that it is easily accessible as a prop//
+                movie={movie}
+                //passes our onMovieClick function as a prop to MovieCard//
+                onMovieClick={(newSelectedMovie) => {
+                  setSelectedMovie(newSelectedMovie);
+                }}
+              />
+            </Col>
           ))}
         </>
       )}
