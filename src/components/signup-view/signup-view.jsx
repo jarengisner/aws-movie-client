@@ -3,10 +3,10 @@ import { Button, Form } from 'react-bootstrap';
 import '../../index.scss';
 
 export const SignUpView = () => {
-  const [newUsername, setNewUsername] = useState(null);
-  const [newPassword, setNewPassword] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [birthday, setBirthday] = useState(null);
+  const [newUsername, setNewUsername] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
 
   const signupHandler = (event) => {
     const data = {

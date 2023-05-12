@@ -4,7 +4,8 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignUpView } from '../signup-view/signup-view';
-import { Row, Col } from 'react-bootstrap';
+import { Navigation } from '../navbar-component/navbar-component';
+import { Row, Col, Button } from 'react-bootstrap';
 import '../../index.scss';
 
 export const MainView = () => {
@@ -72,7 +73,7 @@ export const MainView = () => {
       ) : (
         <>
           {movies.map((movie) => (
-            <Col md={3} className='mb-5'>
+            <Col md={3} className='mb-5' key={movie.id}>
               <MovieCard
                 key={movie.id}
                 //deconstructs movie so that it is easily accessible as a prop//
@@ -86,6 +87,11 @@ export const MainView = () => {
           ))}
         </>
       )}
+      <Row className='justify-content-md-center justify-content-sm-center'>
+        <Col md={1}>
+          <Button onClick={() => setUser('')}>Log out</Button>
+        </Col>
+      </Row>
     </Row>
   );
 };
