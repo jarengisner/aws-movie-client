@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import '../../index.scss';
 
 export const LoginView = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -10,7 +11,6 @@ export const LoginView = ({ onLogin }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     //Object containing our params for our login//
-    //May need some adjustment to fit with the API//
     const data = {
       Username: username,
       Password: password,
@@ -44,33 +44,7 @@ export const LoginView = ({ onLogin }) => {
   };
 
   return (
-    /* {<form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input
-          type='text'
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-            console.log(username);
-          }}
-        />
-      </label>
-
-      <label>
-        Password:
-        <input
-          type='text'
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-      </label>
-
-      <button type='submit'>Login</button>
-    </form>} */
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className='mb-3'>
       <Form.Group controlId='forUsername'>
         <Form.Label>Username:</Form.Label>
         <Form.Control
@@ -81,6 +55,7 @@ export const LoginView = ({ onLogin }) => {
             setUsername(e.target.value);
             console.log(username);
           }}
+          placeholder='Username'
         />
       </Form.Group>
       <Form.Group controlId='forPassword'>
@@ -92,9 +67,10 @@ export const LoginView = ({ onLogin }) => {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
+          placeholder='Password'
         />
       </Form.Group>
-      <Button variant='primary' type='submit'>
+      <Button variant='primary' type='submit' className='mt-3'>
         Log-In
       </Button>
     </Form>

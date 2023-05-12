@@ -1,6 +1,7 @@
 import PropTypes, { string } from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
-import './movie-card.styles.scss';
+/* import './movie-card.styles.scss'; */
+import '../../index.scss';
 
 //movie and onMovieClick are our props we want access to in our child component//
 export const MovieCard = ({ movie, onMovieClick }) => {
@@ -10,14 +11,14 @@ export const MovieCard = ({ movie, onMovieClick }) => {
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text>{movie.author}</Card.Text>
-        <Button onClick={() => onMovieClick(movie)} variant='secondary'>
+        <Button onClick={() => onMovieClick(movie)} variant='primary'>
           Open
         </Button>
       </Card.Body>
     </Card>
   );
 };
-
+//proptypes used to verify information passed by props into our movie cards//
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,

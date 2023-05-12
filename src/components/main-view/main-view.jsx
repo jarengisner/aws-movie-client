@@ -5,6 +5,7 @@ import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignUpView } from '../signup-view/signup-view';
 import { Row, Col } from 'react-bootstrap';
+import '../../index.scss';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -45,6 +46,7 @@ export const MainView = () => {
   return (
     <Row className='justify-content-md-center'>
       {!user || !token ? (
+        //uses md breakpoint to make elements take 6 cols//
         <Col md={6}>
           Log In:
           <LoginView
@@ -64,11 +66,13 @@ export const MainView = () => {
           />
         </Col>
       ) : movies.length === 0 ? (
-        <div>The list is empty!</div>
+        //can use this area for a loading spinner, etc//
+        //refresh page to see how it would be positioned//
+        <h1>Loading...</h1>
       ) : (
         <>
           {movies.map((movie) => (
-            <Col md={3}>
+            <Col md={3} className='mb-5'>
               <MovieCard
                 key={movie.id}
                 //deconstructs movie so that it is easily accessible as a prop//

@@ -1,5 +1,22 @@
-$color: steelblue;
+/* variables must be declared before the import for customizing CSS in Bootstrap */
+
+$body-bg: #dbebfa;
+$primary: #00abe4;
+$secondary: #ffffff;
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+.form-control {
+  background-color: #ffffff;
+}
+.form-control:active {
+  background-color: #ffffff;
+}
+
+.card-body {
+  text-align: center;
+}
 
 .my-flix {
-  color: $color;
+  color: $primary;
 }

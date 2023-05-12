@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import '../../index.scss';
 
 export const SignUpView = () => {
   const [newUsername, setNewUsername] = useState(null);
@@ -35,51 +36,10 @@ export const SignUpView = () => {
         console.log(e);
       });
   };
-  //Need to add our event handler to our form element still//
+
   return (
     <div>
-      {/* <form onSubmit={signupHandler}>
-        <label>Username</label>
-        <input
-          type='text'
-          value={newUsername}
-          onChange={(e) => {
-            setNewUsername(e.target.value);
-          }}
-          required
-          minLength='3'
-        ></input>
-        <label>Password</label>
-        <input
-          type='text'
-          value={newPassword}
-          onChange={(e) => {
-            setNewPassword(e.target.value);
-          }}
-          required
-        ></input>
-        <label>Email</label>
-        <input
-          type='text'
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          required
-        ></input>
-        <label>Birthday</label>
-        <input
-          type='date'
-          value={birthday}
-          onChange={(e) => {
-            setBirthday(e.target.value);
-          }}
-          required
-        ></input>
-        <button type='submit'>Sign up</button>
-      </form>  */}
-
-      <Form onSubmit={signupHandler}>
+      <Form onSubmit={signupHandler} className='mb-3'>
         <Form.Group controlId='signupUsername'>
           <Form.Label>Enter a new Username:</Form.Label>
           <Form.Control
@@ -89,6 +49,7 @@ export const SignUpView = () => {
               setNewUsername(e.target.value);
             }}
             required
+            placeholder='Username'
           />
         </Form.Group>
         <Form.Group controlId='signupPass'>
@@ -100,6 +61,7 @@ export const SignUpView = () => {
               setNewPassword(e.target.value);
             }}
             required
+            placeholder='Password'
           />
         </Form.Group>
         <Form.Group controlId='signupEmail'>
@@ -111,6 +73,7 @@ export const SignUpView = () => {
               setEmail(e.target.value);
             }}
             required
+            placeholder='Email'
           />
         </Form.Group>
         <Form.Group controlId='signupBirthday'>
@@ -124,7 +87,7 @@ export const SignUpView = () => {
             required
           />
         </Form.Group>
-        <Button variant='primary' type='submit'>
+        <Button variant='primary' type='submit' className='mt-3'>
           Sign Up
         </Button>
       </Form>
