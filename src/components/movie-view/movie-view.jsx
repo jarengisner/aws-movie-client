@@ -1,9 +1,14 @@
 import './movie-view.styles.scss';
 import { Button } from 'react-bootstrap';
 import '../../index.scss';
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 
 //movie and onBackClick are the props we are wanting access to//
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies }) => {
+  const { movieId } = useParams();
+
+  const movie = movies.find((m) => m.id === movieId);
   return (
     <div>
       <div>
@@ -31,9 +36,9 @@ export const MovieView = ({ movie, onBackClick }) => {
           <span>{movie.description}</span>
         </div>
       </div>
-      <Button variant='primary' onClick={onBackClick}>
-        Back
-      </Button>
+      <Link to='/'>
+        <Button variant='primary'>Back</Button>
+      </Link>
     </div>
   );
 };
