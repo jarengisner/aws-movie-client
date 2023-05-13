@@ -6,6 +6,7 @@ import { LoginView } from '../login-view/login-view';
 import { SignUpView } from '../signup-view/signup-view';
 import { Navigation } from '../navbar-component/navbar-component';
 import { Row, Col, Button } from 'react-bootstrap';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import '../../index.scss';
 
 export const MainView = () => {
@@ -95,3 +96,16 @@ export const MainView = () => {
     </Row>
   );
 };
+
+{
+  /* <BrowserRouter>
+login view
+  <Route path='' element = {} />
+  sign up view
+  <Route path='' element = {} />
+  movieView
+  <Route path='' element = {} />
+Home view
+  <Route path='' element = {} />
+</BrowserRouter> */
+}
