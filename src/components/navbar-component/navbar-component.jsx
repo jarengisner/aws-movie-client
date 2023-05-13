@@ -1,8 +1,9 @@
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../../index.scss';
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLogOut }) => {
+  //May have to have each conditional return a whole new <Nav> to make button seperate//
   return (
     <Navbar bg='light' expand='lg'>
       <Container>
@@ -11,7 +12,34 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='me-auto'>{/* Add Links here */}</Nav>
+          <Nav className='me-auto'>
+            {!user && (
+              <>
+                <Nav.Link as={Link} to='/login'>
+                  Login
+                </Nav.Link>
+                <Nav.Link as={Link} to='/signup'>
+                  Signup
+                </Nav.Link>
+              </>
+            )}
+            {user && (
+              <>
+                <Nav.Link as={Link} to='/'>
+                  Home
+                </Nav.Link>
+                {/* <Nav.Link as={Link} to='/profile'>
+                  Profile
+                </Nav.Link> */}
+                <Container>
+                  {' '}
+                  <Nav>
+                    <Button onClick={onLogOut}>Log Out</Button>
+                  </Nav>
+                </Container>
+              </>
+            )}
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

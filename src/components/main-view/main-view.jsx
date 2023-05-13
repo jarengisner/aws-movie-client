@@ -13,7 +13,6 @@ export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   //token is stored as a string, not JSON, so no need to parse here//
   const storedToken = localStorage.getItem('token');
-  const [selectedMovie, setSelectedMovie] = useState(null);
   //movies is initialized to nothing, but then populated below//
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(storedUser ? storedUser : null);
@@ -47,7 +46,7 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
-      <NavigationBar />
+      <NavigationBar user={user} onLogOut={() => setUser(null)} />
       <Row className='justify-content-md-center'>
         <Routes>
           <Route
