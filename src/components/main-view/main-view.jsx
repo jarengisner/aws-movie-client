@@ -5,9 +5,12 @@ import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignUpView } from '../signup-view/signup-view';
 import { NavigationBar } from '../navbar-component/navbar-component';
+import { ProfileView } from '../profile-view/profile-view';
+import { UserSettings } from '../user-settings-view/user-settings';
 import { Row, Col, Button } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import '../../index.scss';
+import { UserSettings } from '../user-settings-view/user-settings';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -90,6 +93,38 @@ export const MainView = () => {
                 ) : (
                   <Col md={5}>
                     <MovieView movies={movies} />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path='/user/profile'
+            element={
+              <>
+                {!user ? (
+                  <Navigate to='/login' replace />
+                ) : (
+                  <Col md={5}>
+                    <ProfileView
+                      movies={movies}
+                      user={user}
+                      onLogout={() => setUser('')}
+                    />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path='/user/settings'
+            element={
+              <>
+                {!user ? (
+                  <Navigate to='/login' replace />
+                ) : (
+                  <Col md={5}>
+                    <UserSettings user={user} />
                   </Col>
                 )}
               </>
