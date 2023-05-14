@@ -49,7 +49,7 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
-      <NavigationBar user={user} onLogOut={() => setUser(null)} />
+      <NavigationBar user={user} />
       <Row className='justify-content-md-center'>
         <Routes>
           <Route
@@ -109,7 +109,9 @@ export const MainView = () => {
                     <ProfileView
                       movies={movies}
                       user={user}
-                      onLogout={() => setUser('')}
+                      onLogout={() => {
+                        setUser(null);
+                      }}
                     />
                   </Col>
                 )}
@@ -124,7 +126,7 @@ export const MainView = () => {
                   <Navigate to='/login' replace />
                 ) : (
                   <Col md={5}>
-                    <UserSettings user={user} />
+                    <UserSettings user={user} token={token} />
                   </Col>
                 )}
               </>

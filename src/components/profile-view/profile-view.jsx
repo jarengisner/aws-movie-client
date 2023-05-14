@@ -4,9 +4,6 @@ import { Button } from 'react-bootstrap';
 
 export const ProfileView = ({ movies, user, onLogout }) => {
   const favoriteMovies = movies.filter((m) => user.Favorites.includes(m.id));
-  {
-    console.log(user);
-  }
   return (
     <div>
       <div>

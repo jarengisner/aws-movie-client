@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../../index.scss';
 
-export const UserSettings = (user) => {
+export const UserSettings = (user, token) => {
   const [updatedUsername, setUpdatedUsername] = useState('');
   const [updatedPassword, setUpdatedPassword] = useState('');
 
@@ -14,10 +14,10 @@ export const UserSettings = (user) => {
       Password: updatedPassword,
     };
 
-    fetch(`https://movie-findr.herokuapp.com/users/${user.Username}`, {
+    fetch(`https://movie-findr.herokuapp.com/users/${user.user.Username}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     })
@@ -49,6 +49,9 @@ export const UserSettings = (user) => {
           onChange={(e) => setUpdatedPassword(e.target.value)}
           placeholder='New Password'
         ></Form.Control>
+        <Button variant='primary' type='submit' className='mt-3'>
+          Update
+        </Button>
       </Form>
       <Link to={'/user/profile'}>
         <Button type='primary'>Back</Button>

@@ -9,6 +9,7 @@ export const SignUpView = () => {
   const [birthday, setBirthday] = useState('');
 
   const signupHandler = (event) => {
+    event.preventDefault();
     const data = {
       Username: newUsername,
       Password: newPassword,
