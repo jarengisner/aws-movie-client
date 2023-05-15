@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import '../../index.scss';
+import { Navigate } from 'react-router';
 
-export const SignUpView = () => {
+export const SignUpView = (onSignUp) => {
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -28,10 +29,12 @@ export const SignUpView = () => {
         if (response.ok) {
           response.json();
           alert('Sign Up successful');
-          window.location.reload();
         } else {
           alert('Sign Up Failed :(');
         }
+      })
+      .then((data) => {
+        console.log(data);
       })
       .catch((e) => {
         console.log(e);

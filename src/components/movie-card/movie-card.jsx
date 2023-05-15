@@ -5,7 +5,31 @@ import '../../index.scss';
 import { Link } from 'react-router-dom';
 
 //movie and onMovieClick are our props we want access to in our child component//
-export const MovieCard = ({ movie }) => {
+export const MovieCard = ({ movie, user, token }) => {
+  const favoriteClick = () => {
+    fetch(
+      `https://movie-findr.herokuapp.com/users/${user.Username}/movies/${movie.id}`,
+      {
+        method: 'PUT',
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          res.json();
+        } else {
+          console.log('Something occurred in the first part');
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        console.log('Updated successfully');
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <Card className='h-100'>
       <Card.Img variant='top' src={movie.imageUrl} className='movieImg' />
@@ -15,6 +39,7 @@ export const MovieCard = ({ movie }) => {
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button variant='link'>Details</Button>
         </Link>
+        <Button onClick={favoriteClick}>Favorite</Button>
       </Card.Body>
     </Card>
   );

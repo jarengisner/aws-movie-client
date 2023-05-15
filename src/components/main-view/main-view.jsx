@@ -60,7 +60,12 @@ export const MainView = () => {
                   <Navigate to='/' />
                 ) : (
                   <Col md={5}>
-                    <SignUpView />
+                    <SignUpView
+                      onSignUp={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                      }}
+                    />
                   </Col>
                 )}
               </>
@@ -150,6 +155,8 @@ export const MainView = () => {
                           key={movie.id}
                           //deconstructs movie so that it is easily accessible as a prop//
                           movie={movie}
+                          user={user}
+                          token={token}
                         />
                       </Col>
                     ))}

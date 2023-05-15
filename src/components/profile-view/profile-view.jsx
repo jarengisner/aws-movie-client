@@ -1,6 +1,7 @@
 import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { MovieCard } from '../movie-card/movie-card';
 
 export const ProfileView = ({ movies, user, onLogout }) => {
   const favoriteMovies = movies.filter((m) => user.Favorites.includes(m.id));
@@ -20,11 +21,16 @@ export const ProfileView = ({ movies, user, onLogout }) => {
           <h3>No favorites yet!</h3>
         ) : (
           favoriteMovies.map((movie) => {
-            <MovieCard
-              key={movie.id}
-              //deconstructs movie so that it is easily accessible as a prop//
-              movie={movie}
-            />;
+            {
+              console.log(movie);
+            }
+            return (
+              <MovieCard
+                key={movie.id}
+                //deconstructs movie so that it is easily accessible as a prop//
+                movie={movie}
+              />
+            );
           })
         )}
       </div>
