@@ -1,5 +1,5 @@
 import './movie-view.styles.scss';
-import { Button } from 'react-bootstrap';
+import { Button, CloseButton, Modal } from 'react-bootstrap';
 import '../../index.scss';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';

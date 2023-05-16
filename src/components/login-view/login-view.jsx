@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../../index.scss';
+import { Card, Container, Col, Row } from 'react-bootstrap';
 
 export const LoginView = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -44,35 +45,43 @@ export const LoginView = ({ onLogin }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className='mb-3'>
-      <Form.Group controlId='forUsername'>
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type='text'
-          value={username}
-          required
-          onChange={(e) => {
-            setUsername(e.target.value);
-            console.log(username);
-          }}
-          placeholder='Username'
-        />
-      </Form.Group>
-      <Form.Group controlId='forPassword'>
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type='text'
-          value={password}
-          required
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder='Password'
-        />
-      </Form.Group>
-      <Button variant='primary' type='submit' className='mt-3'>
-        Log-In
-      </Button>
-    </Form>
+    <Container>
+      <Row>
+        <Col className='mt-3'>
+          <Card>
+            <Form onSubmit={handleSubmit} className='m-3'>
+              <Form.Group controlId='forUsername'>
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
+                  type='text'
+                  value={username}
+                  required
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                    console.log(username);
+                  }}
+                  placeholder='Username'
+                />
+              </Form.Group>
+              <Form.Group controlId='forPassword'>
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
+                  type='text'
+                  value={password}
+                  required
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                  placeholder='Password'
+                />
+              </Form.Group>
+              <Button variant='primary' type='submit' className='mt-3'>
+                Log-In
+              </Button>
+            </Form>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };

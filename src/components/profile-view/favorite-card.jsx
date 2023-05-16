@@ -4,34 +4,10 @@ import { Button, Card } from 'react-bootstrap';
 import '../../index.scss';
 import { Link } from 'react-router-dom';
 
-//movie and onMovieClick are our props we want access to in our child component//
-export const MovieCard = ({ movie, user, token }) => {
-  const favoriteClick = () => {
-    fetch(
-      `https://movie-findr.herokuapp.com/users/${user.Username}/movies/${movie.id}`,
-      {
-        method: 'PUT',
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          console.log('Something occurred in the first part');
-        }
-      })
-      .then((data) => {
-        console.log(data);
-        console.log(JSON.stringify(data));
-        localStorage.setItem('user', '');
-        localStorage.setItem('user', JSON.stringify(data));
-        console.log('Updated successfully');
-        alert('Added to favorites');
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+//This component will work the exact same as the movie-card, but it will instead be rendered with an un-favorite button//
+export const FavoriteCard = ({ movie, user, token }) => {
+  const removeClick = () => {
+    //code for a button to un-favorite here//
   };
 
   return (
@@ -43,7 +19,7 @@ export const MovieCard = ({ movie, user, token }) => {
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button variant='link'>Details</Button>
         </Link>
-        <Button onClick={favoriteClick}>Favorite</Button>
+        <Button onClick={removeClick}>Favorite</Button>
       </Card.Body>
     </Card>
   );
