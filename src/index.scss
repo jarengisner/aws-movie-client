@@ -6,6 +6,8 @@ $secondary: #ffffff;
 
 @import '~bootstrap/scss/bootstrap.scss';
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
+
 .form-control {
   background-color: #ffffff;
 }
@@ -19,4 +21,21 @@ $secondary: #ffffff;
 
 .my-flix {
   color: $primary;
+}
+
+.container-fluid {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.card {
+  margin: 6px;
+}
+
+.navbar-brand {
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
 }

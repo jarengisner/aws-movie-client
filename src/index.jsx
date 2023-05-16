@@ -11,7 +11,7 @@ import './index.scss';
 const App = () => {
   return (
     //populates the div with our main component, which includes by proxy the child components//
-    <Container>
+    <Container fluid>
       <MainView />
     </Container>
   );
