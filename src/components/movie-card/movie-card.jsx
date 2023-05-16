@@ -16,14 +16,16 @@ export const MovieCard = ({ movie, user, token }) => {
     )
       .then((res) => {
         if (res.ok) {
-          res.json();
+          return res.json();
         } else {
           console.log('Something occurred in the first part');
         }
       })
       .then((data) => {
         console.log(data);
+        console.log(JSON.stringify(data));
         console.log('Updated successfully');
+        localStorage.setItem('user', data);
       })
       .catch((e) => {
         console.log(e);

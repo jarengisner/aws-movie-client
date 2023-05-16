@@ -116,6 +116,8 @@ export const MainView = () => {
                       user={user}
                       onLogout={() => {
                         setUser(null);
+                        setToken(null);
+                        localStorage.clear();
                       }}
                     />
                   </Col>
