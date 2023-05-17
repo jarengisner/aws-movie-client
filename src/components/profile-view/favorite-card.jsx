@@ -6,8 +6,33 @@ import { Link } from 'react-router-dom';
 
 //This component will work the exact same as the movie-card, but it will instead be rendered with an un-favorite button//
 export const FavoriteCard = ({ movie, user, token }) => {
-  const removeClick = () => {
-    //code for a button to un-favorite here//
+  const removeClick = (event) => {
+    event.preventDefault();
+    fetch(
+      `https://movie-findr.herokuapp.com/users/${user.Username}/movies/${movie.id}`,
+      {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log('Something occurred in the first part');
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        console.log(JSON.stringify(data));
+        localStorage.setItem('user', '');
+        localStorage.setItem('user', JSON.stringify(data));
+        console.log('Removed successfully');
+        alert('Removed from favorites');
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -19,13 +44,13 @@ export const FavoriteCard = ({ movie, user, token }) => {
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button variant='link'>Details</Button>
         </Link>
-        <Button onClick={removeClick}>Favorite</Button>
+        <Button onClick={removeClick}>Remove Favorite</Button>
       </Card.Body>
     </Card>
   );
 };
 //proptypes used to verify information passed by props into our movie cards//
-MovieCard.propTypes = {
+FavoriteCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,

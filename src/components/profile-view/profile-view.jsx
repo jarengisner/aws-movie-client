@@ -2,9 +2,26 @@ import { Col, Row, Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { MovieCard } from '../movie-card/movie-card';
+import { FavoriteCard } from './favorite-card';
+import '../../index.scss';
 
-export const ProfileView = ({ movies, user, onLogout }) => {
+export const ProfileView = ({ movies, user, onLogout, token }) => {
   const favoriteMovies = movies.filter((m) => user.Favorites.includes(m.id));
+  const deleteHandler = (e) => {
+    e.preventDefault();
+    fetch(`https://movie-findr.herokuapp.com/users/${user.Username}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((res) => {
+      if (res.ok) {
+        localStorage.clear();
+        alert('Account Deleted');
+        window.location.reload();
+      } else {
+        console.log('Something didn\t go right above');
+      }
+    });
+  };
   return (
     <>
       <Container>
@@ -16,10 +33,23 @@ export const ProfileView = ({ movies, user, onLogout }) => {
                   <h1>{user.Username}</h1>
                 </div>
                 <div>{user.Email}</div>
-                <Link to={'/user/settings'}>
-                  <Button variant='link'>Settings</Button>
-                </Link>
-                <Button onClick={onLogout}>Log Out</Button>
+                <div>
+                  <Link to={'/user/settings'}>
+                    <Button variant='link'>Settings</Button>
+                  </Link>
+                </div>
+                <div>
+                  <Button onClick={onLogout} className='logout-button'>
+                    Log Out
+                  </Button>
+                  <Button
+                    onClick={deleteHandler}
+                    variant='danger'
+                    className='delete-button'
+                  >
+                    Delete Account
+                  </Button>
+                </div>
               </Card.Body>
             </Card>
           </Col>
@@ -37,10 +67,11 @@ export const ProfileView = ({ movies, user, onLogout }) => {
               }
               return (
                 <Col md={5} className='m-1'>
-                  <MovieCard
+                  <FavoriteCard
                     key={movie.id}
-                    //deconstructs movie so that it is easily accessible as a prop//
                     movie={movie}
+                    user={user}
+                    token={token}
                   />
                 </Col>
               );

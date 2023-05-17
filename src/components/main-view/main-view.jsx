@@ -114,6 +114,7 @@ export const MainView = () => {
                     <ProfileView
                       movies={movies}
                       user={user}
+                      token={token}
                       onLogout={() => {
                         setUser(null);
                         setToken(null);
