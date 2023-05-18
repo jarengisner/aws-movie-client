@@ -46,6 +46,10 @@ export const MainView = () => {
         setMovies(dataMovies);
       });
   }, [token]);
+  const syncUser = (user) => {
+    setUser(user);
+    localStorage.setItem('user', JSON.stringify(user));
+  };
 
   return (
     <BrowserRouter>
@@ -115,6 +119,7 @@ export const MainView = () => {
                       movies={movies}
                       user={user}
                       token={token}
+                      syncUser={syncUser}
                       onLogout={() => {
                         setUser(null);
                         setToken(null);
@@ -160,6 +165,7 @@ export const MainView = () => {
                           movie={movie}
                           user={user}
                           token={token}
+                          syncUser={syncUser}
                         />
                       </Col>
                     ))}

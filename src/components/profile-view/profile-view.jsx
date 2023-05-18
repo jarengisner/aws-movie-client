@@ -5,7 +5,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { FavoriteCard } from './favorite-card';
 import '../../index.scss';
 
-export const ProfileView = ({ movies, user, onLogout, token }) => {
+export const ProfileView = ({ movies, user, onLogout, token, syncUser }) => {
   const favoriteMovies = movies.filter((m) => user.Favorites.includes(m.id));
   const deleteHandler = (e) => {
     e.preventDefault();
@@ -66,12 +66,13 @@ export const ProfileView = ({ movies, user, onLogout, token }) => {
                 console.log(movie);
               }
               return (
-                <Col md={5} className='m-1'>
+                <Col md={5} className='m-1' key={movie.id}>
                   <FavoriteCard
                     key={movie.id}
                     movie={movie}
                     user={user}
                     token={token}
+                    syncUser={syncUser}
                   />
                 </Col>
               );

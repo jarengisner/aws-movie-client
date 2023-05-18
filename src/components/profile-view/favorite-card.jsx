@@ -5,7 +5,7 @@ import '../../index.scss';
 import { Link } from 'react-router-dom';
 
 //This component will work the exact same as the movie-card, but it will instead be rendered with an un-favorite button//
-export const FavoriteCard = ({ movie, user, token }) => {
+export const FavoriteCard = ({ movie, user, token, syncUser }) => {
   const removeClick = (event) => {
     event.preventDefault();
     fetch(
@@ -25,8 +25,7 @@ export const FavoriteCard = ({ movie, user, token }) => {
       .then((data) => {
         console.log(data);
         console.log(JSON.stringify(data));
-        localStorage.setItem('user', '');
-        localStorage.setItem('user', JSON.stringify(data));
+        syncUser(data);
         console.log('Removed successfully');
         alert('Removed from favorites');
       })

@@ -27344,13 +27344,17 @@ const MainView = ()=>{
     }, [
         token
     ]);
+    const syncUser = (user)=>{
+        setUser(user);
+        localStorage.setItem("user", JSON.stringify(user));
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbarComponent.NavigationBar), {
                 user: user
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 52,
+                lineNumber: 56,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
@@ -27374,7 +27378,7 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 55,
+                            lineNumber: 59,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27391,7 +27395,7 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 74,
+                            lineNumber: 78,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27414,7 +27418,7 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 88,
+                            lineNumber: 92,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27429,6 +27433,7 @@ const MainView = ()=>{
                                         movies: movies,
                                         user: user,
                                         token: token,
+                                        syncUser: syncUser,
                                         onLogout: ()=>{
                                             setUser(null);
                                             setToken(null);
@@ -27439,7 +27444,7 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 106,
+                            lineNumber: 110,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27458,7 +27463,7 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 129,
+                            lineNumber: 134,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27480,31 +27485,32 @@ const MainView = ()=>{
                                                 //deconstructs movie so that it is easily accessible as a prop//
                                                 movie: movie,
                                                 user: user,
-                                                token: token
+                                                token: token,
+                                                syncUser: syncUser
                                             }, movie.id, false, void 0, void 0)
                                         }, movie.id, false, void 0, void 0))
                                 }, void 0, false)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 143,
+                            lineNumber: 148,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 54,
+                    lineNumber: 58,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 53,
+                lineNumber: 57,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 51,
+        lineNumber: 55,
         columnNumber: 5
     }, undefined);
 };
@@ -27534,7 +27540,7 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 /* import './movie-card.styles.scss'; */ var _indexScss = require("../../index.scss");
 var _reactRouterDom = require("react-router-dom");
-const MovieCard = ({ movie , user , token  })=>{
+const MovieCard = ({ movie , user , token , syncUser  })=>{
     const favoriteClick = ()=>{
         fetch(`https://movie-findr.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
             method: "PUT",
@@ -27547,8 +27553,7 @@ const MovieCard = ({ movie , user , token  })=>{
         }).then((data)=>{
             console.log(data);
             console.log(JSON.stringify(data));
-            localStorage.setItem("user", "");
-            localStorage.setItem("user", JSON.stringify(data));
+            syncUser(data);
             console.log("Updated successfully");
             alert("Added to favorites");
         }).catch((e)=>{
@@ -27564,7 +27569,7 @@ const MovieCard = ({ movie , user , token  })=>{
                 className: "movieImg"
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 39,
+                lineNumber: 38,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27573,14 +27578,14 @@ const MovieCard = ({ movie , user , token  })=>{
                         children: movie.title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 41,
+                        lineNumber: 40,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: movie.author
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 42,
+                        lineNumber: 41,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27590,12 +27595,12 @@ const MovieCard = ({ movie , user , token  })=>{
                             children: "Details"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 44,
+                            lineNumber: 43,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 43,
+                        lineNumber: 42,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -27603,19 +27608,19 @@ const MovieCard = ({ movie , user , token  })=>{
                         children: "Favorite"
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 46,
+                        lineNumber: 45,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 40,
+                lineNumber: 39,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 38,
+        lineNumber: 37,
         columnNumber: 5
     }, undefined);
 };
@@ -47007,7 +47012,7 @@ var _reactRouterDom = require("react-router-dom");
 var _movieCard = require("../movie-card/movie-card");
 var _favoriteCard = require("./favorite-card");
 var _indexScss = require("../../index.scss");
-const ProfileView = ({ movies , user , onLogout , token  })=>{
+const ProfileView = ({ movies , user , onLogout , token , syncUser  })=>{
     const favoriteMovies = movies.filter((m)=>user.Favorites.includes(m.id));
     const deleteHandler = (e)=>{
         e.preventDefault();
@@ -47151,13 +47156,14 @@ const ProfileView = ({ movies , user , onLogout , token  })=>{
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteCard.FavoriteCard), {
                                     movie: movie,
                                     user: user,
-                                    token: token
+                                    token: token,
+                                    syncUser: syncUser
                                 }, movie.id, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
                                     lineNumber: 70,
                                     columnNumber: 19
                                 }, undefined)
-                            }, void 0, false, {
+                            }, movie.id, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
                                 lineNumber: 69,
                                 columnNumber: 17
@@ -47202,7 +47208,7 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 /* import './movie-card.styles.scss'; */ var _indexScss = require("../../index.scss");
 var _reactRouterDom = require("react-router-dom");
-const FavoriteCard = ({ movie , user , token  })=>{
+const FavoriteCard = ({ movie , user , token , syncUser  })=>{
     const removeClick = (event)=>{
         event.preventDefault();
         fetch(`https://movie-findr.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
@@ -47216,8 +47222,7 @@ const FavoriteCard = ({ movie , user , token  })=>{
         }).then((data)=>{
             console.log(data);
             console.log(JSON.stringify(data));
-            localStorage.setItem("user", "");
-            localStorage.setItem("user", JSON.stringify(data));
+            syncUser(data);
             console.log("Removed successfully");
             alert("Removed from favorites");
         }).catch((e)=>{
@@ -47233,7 +47238,7 @@ const FavoriteCard = ({ movie , user , token  })=>{
                 className: "movieImg"
             }, void 0, false, {
                 fileName: "src/components/profile-view/favorite-card.jsx",
-                lineNumber: 40,
+                lineNumber: 39,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -47242,14 +47247,14 @@ const FavoriteCard = ({ movie , user , token  })=>{
                         children: movie.title
                     }, void 0, false, {
                         fileName: "src/components/profile-view/favorite-card.jsx",
-                        lineNumber: 42,
+                        lineNumber: 41,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: movie.author
                     }, void 0, false, {
                         fileName: "src/components/profile-view/favorite-card.jsx",
-                        lineNumber: 43,
+                        lineNumber: 42,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -47259,12 +47264,12 @@ const FavoriteCard = ({ movie , user , token  })=>{
                             children: "Details"
                         }, void 0, false, {
                             fileName: "src/components/profile-view/favorite-card.jsx",
-                            lineNumber: 45,
+                            lineNumber: 44,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/favorite-card.jsx",
-                        lineNumber: 44,
+                        lineNumber: 43,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -47272,19 +47277,19 @@ const FavoriteCard = ({ movie , user , token  })=>{
                         children: "Remove Favorite"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/favorite-card.jsx",
-                        lineNumber: 47,
+                        lineNumber: 46,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/favorite-card.jsx",
-                lineNumber: 41,
+                lineNumber: 40,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/profile-view/favorite-card.jsx",
-        lineNumber: 39,
+        lineNumber: 38,
         columnNumber: 5
     }, undefined);
 };
