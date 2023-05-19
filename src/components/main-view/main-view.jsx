@@ -51,18 +51,6 @@ export const MainView = () => {
     setUser(user);
     localStorage.setItem('user', JSON.stringify(user));
   };
-  //RESUME BY MAKING THIS WORK//
-  const getFilteredMovies = (query, movies) => {
-    if (!query) {
-      return movies;
-    } else {
-      return movies.filter((movie) => {
-        movie.title.includes(query);
-      });
-    }
-  };
-
-  const filteredMovies = getFilteredMovies(query, movies);
 
   return (
     <BrowserRouter>
@@ -170,18 +158,33 @@ export const MainView = () => {
                   </Col>
                 ) : (
                   <>
-                    {filteredMovies.map((movie) => (
-                      <Col md={3} className='mb-5' key={movie.id}>
-                        <MovieCard
-                          key={movie.id}
-                          //deconstructs movie so that it is easily accessible as a prop//
-                          movie={movie}
-                          user={user}
-                          token={token}
-                          syncUser={syncUser}
-                        />
-                      </Col>
-                    ))}
+                    {query
+                      ? movies
+                          .filter((movie) =>
+                            movie.title.toLowerCase().includes(query)
+                          )
+                          .map((movie) => (
+                            <Col md={3} className='mb-5' key={movie.id}>
+                              <MovieCard
+                                movie={movie}
+                                key={movie.id}
+                                user={user}
+                                token={token}
+                                syncUser={syncUser}
+                              />
+                            </Col>
+                          ))
+                      : movies.map((movie) => (
+                          <Col md={3} className='mb-5' key={movie.id}>
+                            <MovieCard
+                              movie={movie}
+                              key={movie.id}
+                              user={user}
+                              token={token}
+                              syncUser={syncUser}
+                            />
+                          </Col>
+                        ))}
                   </>
                 )}
               </>
@@ -192,3 +195,16 @@ export const MainView = () => {
     </BrowserRouter>
   );
 };
+
+{
+  /* {filteredMovies.map((movie) => (
+                      <Col md={3} className='mb-5' key={movie.id}>
+                        <MovieCard
+                          key={movie.id}
+                          //deconstructs movie so that it is easily accessible as a prop//
+                          movie={movie}
+                          user={user}
+                          token={token}
+                          syncUser={syncUser}
+                        /> */
+}

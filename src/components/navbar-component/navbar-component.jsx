@@ -12,33 +12,36 @@ export const NavigationBar = ({ user, onLogOut, setQuery }) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='me-auto'>
-            {!user && (
-              <>
+          {!user && (
+            <>
+              <Nav className='me-auto'>
                 <Nav.Link as={Link} to='/login'>
                   Login
                 </Nav.Link>
                 <Nav.Link as={Link} to='/signup'>
                   Signup
                 </Nav.Link>
-              </>
-            )}
-            {user && (
-              <>
+              </Nav>
+            </>
+          )}
+          {user && (
+            <>
+              <Nav className='me-auto'>
                 <Nav.Link as={Link} to='/'>
                   Home
                 </Nav.Link>
                 <Nav.Link as={Link} to='/user/profile'>
                   Profile
                 </Nav.Link>
+              </Nav>
+              <Nav className='justify-content-end'>
                 <input
-                  className='justify-content-end'
                   placeholder='Search'
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={(e) => setQuery(e.target.value.toLowerCase())}
                 ></input>
-              </>
-            )}
-          </Nav>
+              </Nav>
+            </>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
