@@ -11,6 +11,11 @@ import { Row, Col, Button } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import '../../index.scss';
 import { UserSettings } from '../user-settings-view/user-settings';
+import { ActionView } from '../genre-views/action-view';
+import { ComedyView } from '../genre-views/comedy-view';
+import { SciFiView } from '../genre-views/sci-fi-view';
+import { DramaView } from '../genre-views/drama-view';
+import { HorrorView } from '../genre-views/horror-view';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -21,6 +26,7 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [query, setQuery] = useState('');
+  const [filter, setFilter] = useState('');
 
   //useEffect is used to run side effects during the course of a components lifecycle//
   useEffect(() => {
@@ -54,7 +60,7 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
-      <NavigationBar user={user} setQuery={setQuery} />
+      <NavigationBar user={user} setQuery={setQuery} setFilter={setFilter} />
       <Row className='justify-content-md-center'>
         <Routes>
           <Route
@@ -142,6 +148,91 @@ export const MainView = () => {
                   <Col md={5}>
                     <UserSettings user={user} token={token} />
                   </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path='/genres/Action'
+            element={
+              <>
+                {!user ? (
+                  <Navigate to='/login' replace />
+                ) : (
+                  <ActionView
+                    movies={movies}
+                    user={user}
+                    token={token}
+                    syncUser={syncUser}
+                  />
+                )}
+              </>
+            }
+          />
+          <Route
+            path='/genres/Comedy'
+            element={
+              <>
+                {!user ? (
+                  <Navigate to='/login' replace />
+                ) : (
+                  <ComedyView
+                    movies={movies}
+                    user={user}
+                    token={token}
+                    syncUser={syncUser}
+                  />
+                )}
+              </>
+            }
+          />
+          <Route
+            path='/genres/Sci-Fi'
+            element={
+              <>
+                {!user ? (
+                  <Navigate to='/login' replace />
+                ) : (
+                  <SciFiView
+                    movies={movies}
+                    user={user}
+                    token={token}
+                    syncUser={syncUser}
+                  />
+                )}
+              </>
+            }
+          />
+          <Route
+            path='/genres/Drama'
+            element={
+              <>
+                {!user ? (
+                  <Navigate to='/login' replace />
+                ) : (
+                  <DramaView
+                    movies={movies}
+                    user={user}
+                    token={token}
+                    syncUser={syncUser}
+                  />
+                )}
+              </>
+            }
+          />
+          <Route
+            path='/genres/Horror'
+            element={
+              <>
+                {!user ? (
+                  <Navigate to='/login' replace />
+                ) : (
+                  <HorrorView
+                    movies={movies}
+                    user={user}
+                    token={token}
+                    syncUser={syncUser}
+                  />
                 )}
               </>
             }
