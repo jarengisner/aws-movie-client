@@ -4,13 +4,14 @@ import { Button, Card } from 'react-bootstrap';
 import '../../index.scss';
 import { Link } from 'react-router-dom';
 
-//movie and onMovieClick are our props we want access to in our child component//
-export const MovieCard = ({ movie, user, token, syncUser }) => {
-  const favoriteClick = () => {
+//This component will work the exact same as the movie-card, but it will instead be rendered with an un-favorite button//
+export const FavoriteCard = ({ movie, user, token, syncUser }) => {
+  const removeClick = (event) => {
+    event.preventDefault();
     fetch(
       `https://movie-findr.herokuapp.com/users/${user.Username}/movies/${movie.id}`,
       {
-        method: 'PUT',
+        method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       }
     )
@@ -25,8 +26,8 @@ export const MovieCard = ({ movie, user, token, syncUser }) => {
         console.log(data);
         console.log(JSON.stringify(data));
         syncUser(data);
-        console.log('Updated successfully');
-        alert('Added to favorites');
+        console.log('Removed successfully');
+        alert('Removed from favorites');
       })
       .catch((e) => {
         console.log(e);
@@ -42,13 +43,13 @@ export const MovieCard = ({ movie, user, token, syncUser }) => {
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button variant='link'>Details</Button>
         </Link>
-        <Button onClick={favoriteClick}>Favorite</Button>
+        <Button onClick={removeClick}>Remove Favorite</Button>
       </Card.Body>
     </Card>
   );
 };
 //proptypes used to verify information passed by props into our movie cards//
-MovieCard.propTypes = {
+FavoriteCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,

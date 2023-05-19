@@ -12032,6 +12032,10 @@ textarea.form-control-lg {
   font-weight: 700;
 }
 
+.delete-button, .logout-button {
+  margin: 5px;
+}
+
 img {
   width: 100%;
   height: auto;
