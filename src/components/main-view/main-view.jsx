@@ -286,16 +286,3 @@ export const MainView = () => {
     </BrowserRouter>
   );
 };
-
-{
-  /* {filteredMovies.map((movie) => (
-                      <Col md={3} className='mb-5' key={movie.id}>
-                        <MovieCard
-                          key={movie.id}
-                          //deconstructs movie so that it is easily accessible as a prop//
-                          movie={movie}
-                          user={user}
-                          token={token}
-                          syncUser={syncUser}
-                        /> */
-}
