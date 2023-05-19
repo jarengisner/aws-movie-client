@@ -20,6 +20,7 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [query, setQuery] = useState('');
 
   //useEffect is used to run side effects during the course of a components lifecycle//
   useEffect(() => {
@@ -50,10 +51,22 @@ export const MainView = () => {
     setUser(user);
     localStorage.setItem('user', JSON.stringify(user));
   };
+  //RESUME BY MAKING THIS WORK//
+  const getFilteredMovies = (query, movies) => {
+    if (!query) {
+      return movies;
+    } else {
+      return movies.filter((movie) => {
+        movie.title.includes(query);
+      });
+    }
+  };
+
+  const filteredMovies = getFilteredMovies(query, movies);
 
   return (
     <BrowserRouter>
-      <NavigationBar user={user} />
+      <NavigationBar user={user} setQuery={setQuery} />
       <Row className='justify-content-md-center'>
         <Routes>
           <Route
@@ -157,7 +170,7 @@ export const MainView = () => {
                   </Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                    {filteredMovies.map((movie) => (
                       <Col md={3} className='mb-5' key={movie.id}>
                         <MovieCard
                           key={movie.id}

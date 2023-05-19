@@ -2,7 +2,7 @@ import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../../index.scss';
 
-export const NavigationBar = ({ user, onLogOut }) => {
+export const NavigationBar = ({ user, onLogOut, setQuery }) => {
   //May have to have each conditional return a whole new <Nav> to make button seperate//
   return (
     <Navbar bg='light' expand='lg'>
@@ -31,6 +31,11 @@ export const NavigationBar = ({ user, onLogOut }) => {
                 <Nav.Link as={Link} to='/user/profile'>
                   Profile
                 </Nav.Link>
+                <input
+                  className='justify-content-end'
+                  placeholder='Search'
+                  onChange={(e) => setQuery(e.target.value)}
+                ></input>
               </>
             )}
           </Nav>
