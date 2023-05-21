@@ -33,28 +33,32 @@ export const UserSettings = (user, token) => {
       .catch((e) => console.log(e));
   };
   return (
-    <div>
+    <div className='settingsForm'>
       <Form onSubmit={updateHandler}>
-        <Form.Label>Enter New Username</Form.Label>
+        <Form.Label>New Username</Form.Label>
         <Form.Control
           type='text'
           value={updatedUsername}
           onChange={(e) => setUpdatedUsername(e.target.value)}
           placeholder='New Username'
+          className='mb-3'
         ></Form.Control>
-        <Form.Label>Enter New Password</Form.Label>
+        <Form.Label>New Password</Form.Label>
         <Form.Control
           type='text'
           value={updatedPassword}
           onChange={(e) => setUpdatedPassword(e.target.value)}
           placeholder='New Password'
+          className='mb-3'
         ></Form.Control>
-        <Button variant='primary' type='submit' className='mt-3'>
+        <Button variant='danger' type='submit' className='mt-3'>
           Update
         </Button>
       </Form>
       <Link to={'/user/profile'}>
-        <Button type='primary'>Back</Button>
+        <Button type='primary' className='mt-3'>
+          Back
+        </Button>
       </Link>
     </div>
   );

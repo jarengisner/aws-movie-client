@@ -46,6 +46,7 @@ export const SignUpView = (onSignUp) => {
       <Row>
         <Col>
           <Card className='mt-3'>
+            <h1 className='login-signup-title'>Sign Up</h1>
             <Form onSubmit={signupHandler} className='m-3'>
               <Form.Group controlId='signupUsername'>
                 <Form.Label>Enter a new Username:</Form.Label>

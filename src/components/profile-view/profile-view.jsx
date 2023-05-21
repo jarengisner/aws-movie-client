@@ -25,7 +25,7 @@ export const ProfileView = ({ movies, user, onLogout, token, syncUser }) => {
   return (
     <>
       <Container>
-        <Row>
+        <Row className='profileTop'>
           <Col>
             <Card>
               <Card.Body>

@@ -12003,6 +12003,10 @@ textarea.form-control-lg {
   }
 }
 
+body {
+  font-family: Poppins, sans-serif;
+}
+
 .form-control, .form-control:active {
   background-color: #fff;
 }
@@ -12034,6 +12038,36 @@ textarea.form-control-lg {
 
 .delete-button, .logout-button {
   margin: 5px;
+}
+
+.card-title {
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
+}
+
+.btn {
+  font-family: Poppins, sans-serif;
+  font-weight: 300;
+}
+
+.sub-title {
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
+}
+
+.row {
+  margin-top: 60px;
+}
+
+.genreRow, .profileTop, .settingsForm {
+  margin-top: 10px;
+}
+
+.login-signup-title {
+  margin-top: 8px;
+  margin-left: 18px;
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
 }
 
 img {
