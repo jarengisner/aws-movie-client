@@ -3,7 +3,7 @@ import { Button, Container, Form, Row, Col, Card } from 'react-bootstrap';
 import '../../index.scss';
 import { Navigate } from 'react-router';
 
-export const SignUpView = (onSignUp) => {
+export const SignUpView = () => {
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [email, setEmail] = useState('');

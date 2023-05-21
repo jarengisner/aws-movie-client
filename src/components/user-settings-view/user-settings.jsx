@@ -13,7 +13,7 @@ export const UserSettings = (user, token) => {
       Username: updatedUsername,
       Password: updatedPassword,
     };
-
+    //sends request to our update endpoint in the back end with a PUT request//
     fetch(`https://movie-findr.herokuapp.com/users/${user.user.Username}`, {
       method: 'PUT',
       headers: {
