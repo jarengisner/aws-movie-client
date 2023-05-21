@@ -12,9 +12,19 @@ The objective of this project was to build a seamless application using both fro
 
 ## Technology
 
--React
--React Router
--React Bootstrap
+- React
+- React Router
+- React Bootstrap
+
+## Features
+
+- Display movies fetched from API
+- Display details of movie through a seperate movie view
+- Sign-Up and Login features
+- Ability to update username and password
+- Ability to favorite/un-favorite movies
+- View information about genres and view movies of that genre
+- Search Functionality
 
 ## Live Application
 
