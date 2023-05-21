@@ -2,7 +2,7 @@ import { Navbar, Container, Nav, Button, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../../index.scss';
 
-export const NavigationBar = ({ user, onLogOut, setQuery, setFilter }) => {
+export const NavigationBar = ({ user, setQuery }) => {
   //May have to have each conditional return a whole new <Nav> to make button seperate//
   return (
     <Navbar bg='light' expand='lg' fixed='top'>

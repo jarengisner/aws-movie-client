@@ -53,6 +53,7 @@ export const MainView = () => {
         setMovies(dataMovies);
       });
   }, [token]);
+  //syncUser is used to sync the local storage up with our updated user in the database, when movies are favorited/unfavorited//
   const syncUser = (user) => {
     setUser(user);
     localStorage.setItem('user', JSON.stringify(user));

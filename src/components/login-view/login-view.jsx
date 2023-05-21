@@ -28,9 +28,9 @@ export const LoginView = ({ onLogin }) => {
       //one liner arrow functions you can omit the return and brackets if function is one line//
       .then((response) => response.json())
       .then((data) => {
-        //data is undefined when reaching this point//
         console.log('Login response: ', data);
         if (data.user) {
+          //if we find a user assign them to our local storage//
           localStorage.setItem('user', JSON.stringify(data.user));
           localStorage.setItem('token', data.token);
           console.log('successful login');
