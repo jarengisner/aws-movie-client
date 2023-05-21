@@ -5,7 +5,7 @@ export const HorrorView = ({ movies, user, syncUser, token }) => {
   const filtMovies = movies.filter((movie) => movie.genre === 'Horror');
   return (
     <>
-      <Row>
+      <Row className='genreRow'>
         <Col>
           <Card>
             <Card.Body>

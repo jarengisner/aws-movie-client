@@ -5,7 +5,7 @@ export const ActionView = ({ movies, user, syncUser, token }) => {
   const filtMovies = movies.filter((movie) => movie.genre === 'Action');
   return (
     <>
-      <Row>
+      <Row className='genreRow'>
         <Col>
           <Card>
             <Card.Body>

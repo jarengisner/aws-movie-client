@@ -49,6 +49,7 @@ export const LoginView = ({ onLogin }) => {
       <Row>
         <Col className='mt-3'>
           <Card>
+            <h1 className='login-signup-title'>Login</h1>
             <Form onSubmit={handleSubmit} className='m-3'>
               <Form.Group controlId='forUsername'>
                 <Form.Label>Username:</Form.Label>

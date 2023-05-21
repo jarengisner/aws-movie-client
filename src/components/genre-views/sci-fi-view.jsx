@@ -5,7 +5,7 @@ export const SciFiView = ({ movies, user, syncUser, token }) => {
   const filtMovies = movies.filter((movie) => movie.genre === 'Sci-Fi');
   return (
     <>
-      <Row>
+      <Row className='genreRow'>
         <Col>
           <Card>
             <Card.Body>

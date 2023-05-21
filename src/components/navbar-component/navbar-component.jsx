@@ -5,7 +5,7 @@ import '../../index.scss';
 export const NavigationBar = ({ user, onLogOut, setQuery, setFilter }) => {
   //May have to have each conditional return a whole new <Nav> to make button seperate//
   return (
-    <Navbar bg='light' expand='lg'>
+    <Navbar bg='light' expand='lg' fixed='top'>
       <Container>
         <Navbar.Brand as={Link} to='/'>
           Movie Findr

@@ -5,7 +5,7 @@ export const ComedyView = ({ movies, user, syncUser, token }) => {
   const filtMovies = movies.filter((movie) => movie.genre === 'Comedy');
   return (
     <>
-      <Row>
+      <Row className='genreRow'>
         <Col>
           <Card>
             <Card.Body>

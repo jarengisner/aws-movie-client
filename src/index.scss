@@ -8,6 +8,10 @@ $secondary: #ffffff;
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
 
+body {
+  font-family: Poppins, sans-serif;
+}
+
 .form-control {
   background-color: #ffffff;
 }
@@ -57,5 +61,22 @@ $secondary: #ffffff;
 
 .sub-title {
   font-family: Poppins, sans-serif;
+  font-weight: 700;
+}
+
+.row {
+  margin-top: 60px;
+}
+
+.genreRow,
+.profileTop,
+.settingsForm {
+  margin-top: 10px;
+}
+
+.login-signup-title {
+  font-family: Poppins, sans-serif;
+  margin-left: 18px;
+  margin-top: 8px;
   font-weight: 700;
 }
