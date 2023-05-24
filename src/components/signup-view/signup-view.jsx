@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Container, Form, Row, Col, Card } from 'react-bootstrap';
 import '../../index.scss';
-import { Navigate } from 'react-router';
 
 export const SignUpView = () => {
   const [newUsername, setNewUsername] = useState('');
@@ -29,6 +28,7 @@ export const SignUpView = () => {
         if (response.ok) {
           response.json();
           alert('Sign Up successful');
+          window.location.reload();
         } else {
           alert('Sign Up Failed :(');
         }
