@@ -30,6 +30,9 @@ export const MainView = () => {
 
   //useEffect is used to run side effects during the course of a components lifecycle//
   useEffect(() => {
+    if (!token) {
+      return;
+    }
     fetch('https://movie-findr.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` },
     })
