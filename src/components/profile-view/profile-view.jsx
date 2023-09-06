@@ -9,10 +9,13 @@ export const ProfileView = ({ movies, user, onLogout, token, syncUser }) => {
   const favoriteMovies = movies.filter((m) => user.Favorites.includes(m.id));
   const deleteHandler = (e) => {
     e.preventDefault();
-    fetch(`https://movie-findr.herokuapp.com/users/${user.Username}`, {
-      method: 'DELETE',
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((res) => {
+    fetch(
+      `http://ec2-18-234-71-99.compute-1.amazonaws.com:8080/users/${user.Username}`,
+      {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    ).then((res) => {
       if (res.ok) {
         localStorage.clear();
         alert('Account Deleted');

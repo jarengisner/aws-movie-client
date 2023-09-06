@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 export const MovieCard = ({ movie, user, token, syncUser }) => {
   const favoriteClick = () => {
     fetch(
-      `https://movie-findr.herokuapp.com/users/${user.Username}/movies/${movie.id}`,
+      `http://ec2-18-234-71-99.compute-1.amazonaws.com:8080/users/${user.Username}/movies/${movie.id}`,
       {
         method: 'PUT',
         headers: { Authorization: `Bearer ${token}` },

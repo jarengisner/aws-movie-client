@@ -17,7 +17,7 @@ export const SignUpView = () => {
       Birthday: birthday,
     };
 
-    fetch('https://movie-findr.herokuapp.com/users', {
+    fetch('http://ec2-18-234-71-99.compute-1.amazonaws.com:8080/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

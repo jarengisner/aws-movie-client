@@ -33,7 +33,7 @@ export const MainView = () => {
     if (!token) {
       return;
     }
-    fetch('https://movie-findr.herokuapp.com/movies', {
+    fetch('http://ec2-18-234-71-99.compute-1.amazonaws.com:8080/movies', {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())

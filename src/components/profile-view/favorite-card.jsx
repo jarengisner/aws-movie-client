@@ -9,7 +9,7 @@ export const FavoriteCard = ({ movie, user, token, syncUser }) => {
   const removeClick = (event) => {
     event.preventDefault();
     fetch(
-      `https://movie-findr.herokuapp.com/users/${user.Username}/movies/${movie.id}`,
+      `http://ec2-18-234-71-99.compute-1.amazonaws.com:8080/${user.Username}/movies/${movie.id}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },

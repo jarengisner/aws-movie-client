@@ -17,7 +17,7 @@ export const LoginView = ({ onLogin }) => {
       Password: password,
     };
 
-    fetch('https://movie-findr.herokuapp.com/login', {
+    fetch('http://ec2-18-234-71-99.compute-1.amazonaws.com:8080/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
